@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACTOWIZ SOLUTION - Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            width: 420px;
+            backdrop-filter: blur(10px);
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .login-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .login-header h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .login-header p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .login-container img {
+            display: block;
+            margin: 0 auto 30px;
+            max-width: 200px;
+            height: auto;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .form-group input:focus {
+            border-color: #4a90e2;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
+            background-color: white;
+        }
+        
+        .form-group i {
+            position: absolute;
+            top: 48px;
+            right: 15px;
+            color: #999;
+        }
+        
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #4a90e2, #0e61c0);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            margin-top: 20px;
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(231, 76, 60, 0.1);
+            border-radius: 5px;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .brand-logo {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .brand-logo span {
+            color: #4a90e2;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="brand-logo">ACTO<span>WIZ</span></div>
+        <div class="login-header">
+            <h2>Welcome Back</h2>
+            <p>Enter your credentials to access HR Analytics</p>
+        </div>
+        <form action="/login" method="post" autocomplete="off">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="off">
+            </div>
+            <button type="submit">Login</button>
+            {% if error %}
+            <p class="error-message">{{ error }}</p>
+            {% endif %}
+        </form>
+    </div>
+    
+    <script>
+        // Clear any cached form data on page load
+        window.onload = function() {
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            
+            // Force the fields to be manually entered each time
+            document.getElementById('username').setAttribute('readonly', true);
+            document.getElementById('password').setAttribute('readonly', true);
+            
+            setTimeout(function() {
+                document.getElementById('username').removeAttribute('readonly');
+                document.getElementById('password').removeAttribute('readonly');
+            }, 100);
+        }
+    </script>
+</body>
+</html>
